@@ -1,0 +1,43 @@
+plugins {
+    id 'org.springframework.boot' version '3.2.0'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // 웹 애플리케이션을 위한 스타터
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    
+    // Thymeleaf 템플릿 엔진
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    
+    // Lombok을 사용한 코드 간소화
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    
+    // 액추에이터를 통한 모니터링
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    
+    // 특정 의존성 제외 예제
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    
+    // 대체 서블릿 컨테이너로 Undertow 사용
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+    
+    // 테스트 스타터
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+} 

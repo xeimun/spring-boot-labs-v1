@@ -1,0 +1,12 @@
+rootProject.name = 'spring-boot-labs-v1'
+
+include 'ch1-spring-boot-basic:examples:01-what-is-spring-boot'
+include 'ch1-spring-boot-basic:examples:02-beans'
+include 'ch1-spring-boot-basic:examples:03-dependency-management'
+include 'ch1-spring-boot-basic:examples:04-di-and-component-scan'
+include 'ch1-spring-boot-basic:examples:05-bean-lifecycle'
+include 'ch1-spring-boot-basic:examples:06-properties-and-binding'
+include 'ch1-spring-boot-basic:examples:07-profiles-and-env'
+include 'ch1-spring-boot-basic:examples:08-logging'
+include 'ch1-spring-boot-basic:examples:09-external-config'
+include 'ch1-spring-boot-basic:examples:10-devtools-and-actuator'

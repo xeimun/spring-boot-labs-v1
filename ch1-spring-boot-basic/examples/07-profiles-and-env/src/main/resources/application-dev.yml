@@ -1,0 +1,26 @@
+server:
+  port: 8081  # 개발 환경은 8081 포트 사용
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:devdb
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+  
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      
+  jpa:
+    show-sql: true
+    
+app:
+  message: 개발 환경의 메시지입니다.
+  cache:
+    enabled: false
+  log-level: debug
+  feature-flags:
+    feature-a: true  # 개발 환경에서는 활성화
+    feature-b: true  # 개발 환경에서는 활성화 

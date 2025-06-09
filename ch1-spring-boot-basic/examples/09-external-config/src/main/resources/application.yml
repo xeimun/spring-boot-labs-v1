@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: external-config-example
+  
+  profiles:
+    active: local
+  
+  # Spring Cloud Config 설정 비활성화 (예제 목적)
+  cloud:
+    config:
+      enabled: false
+
+# 애플리케이션 설정
+app:
+  name: 외부 설정 예제 애플리케이션
+  description: 스프링 부트에서 외부 설정을 관리하는 방법을 보여주는 예제입니다
+  
+  # 데이터베이스 설정
+  db:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+    pool-size: 10
+  
+  # API 설정
+  api:
+    url: https://api.example.com
+    key: abcd1234
+    timeout: 30
+
+# 로깅 설정
+logging:
+  level:
+    root: INFO
+    com.example.external: DEBUG 

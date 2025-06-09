@@ -1,0 +1,56 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: devtools-actuator-example
+
+  # DevTools 설정
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+      exclude: static/**,public/**
+    livereload:
+      enabled: true
+    
+    # 원격 개발 (보안 주의)
+    remote:
+      secret: mysecret  # 실무에서는 보안적으로 강력한 값 사용 필요
+
+# Actuator 설정
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,loggers,beans,mappings
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: false  # 안전을 위해 기본적으로 비활성화
+  info:
+    env:
+      enabled: true  # 환경 정보 노출
+    git:
+      enabled: true  # Git 정보 노출 (git-commit-id-plugin 필요)
+    build:
+      enabled: true  # 빌드 정보 노출
+
+# 애플리케이션 정보 (Actuator /info 엔드포인트에 노출)
+info:
+  app:
+    name: "DevTools & Actuator 예제"
+    description: "스프링 부트 DevTools와 Actuator 사용 예제"
+    version: "1.0.0"
+  contact:
+    email: "contact@example.com"
+    phone: "+82-10-1234-5678"
+
+# 로깅 설정
+logging:
+  level:
+    root: INFO
+    com.example.devtools: DEBUG
+    org.springframework.boot.devtools: DEBUG 
