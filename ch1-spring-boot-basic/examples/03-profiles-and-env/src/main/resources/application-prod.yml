@@ -1,0 +1,7 @@
+app:
+  name: 운영환경 앱
+  version: 3.0.0
+  message: 운영 메시지
+
+prod:
+  message: 메롱

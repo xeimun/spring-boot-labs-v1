@@ -3,25 +3,12 @@ app:
   version: 1.0.0
   message: Hello from YAML!
 
+spring:
+  application:
+    name: hello-app
+  profiles:
+    active: dev  # 기본 활성화 프로파일
+
 server:
   port: 8081
 
-#spring:
-#  application:
-#    name: profile-example
-#
-#  profiles:
-#    active: dev  # 기본 활성화 프로파일
-#
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#    show-sql: true
-#
-#app:
-#  message: 기본 환경의 메시지입니다.
-#  cache:
-#    enabled: false
-#  feature-flags:
-#    feature-a: false
-#    feature-b: false
