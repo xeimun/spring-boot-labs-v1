@@ -4,4 +4,4 @@ app:
   message: 개발 메시지
   
 dev:
-  message: AI를 이기는 개발자가 될거에요
+  message: 개발 환경에서 동작중입니다...

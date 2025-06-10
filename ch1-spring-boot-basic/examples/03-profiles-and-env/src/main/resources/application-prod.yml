@@ -4,4 +4,4 @@ app:
   message: 운영 메시지
 
 prod:
-  message: 메롱
+  message: 운영 환경에서 배포하였습니다...
