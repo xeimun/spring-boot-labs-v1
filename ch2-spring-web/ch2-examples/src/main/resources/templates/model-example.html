@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf 모델 예제</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        .section {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #007bff;
+            font-size: 18px;
+        }
+        .code {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        .highlight {
+            background-color: #fffacd;
+            padding: 2px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thymeleaf 모델 예제</h1>
+        
+        <div class="section">
+            <h2>1. 단순 텍스트 출력</h2>
+            <p>메시지: <span th:text="${message}" class="highlight">메시지 내용</span></p>
+            <div class="code">
+                &lt;span th:text="${message}"&gt;메시지 내용&lt;/span&gt;
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>2. 날짜 포맷팅</h2>
+            <p>현재 시간: <span th:text="${#temporals.format(currentTime, 'yyyy-MM-dd HH:mm:ss')}" class="highlight">2023-01-01 12:00:00</span></p>
+            <div class="code">
+                &lt;span th:text="${#temporals.format(currentTime, 'yyyy-MM-dd HH:mm:ss')}"&gt;2023-01-01 12:00:00&lt;/span&gt;
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>3. 객체 속성 접근</h2>
+            <p>사용자 이름: <span th:text="${user.name}" class="highlight">홍길동</span></p>
+            <p>사용자 이메일: <span th:text="${user.email}" class="highlight">hong@example.com</span></p>
+            <div class="code">
+                &lt;span th:text="${user.name}"&gt;홍길동&lt;/span&gt;<br>
+                &lt;span th:text="${user.email}"&gt;hong@example.com&lt;/span&gt;
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>4. 조건부 표시</h2>
+            <div th:if="${user.name == '홍길동'}" class="highlight">
+                <p>관리자 권한이 있습니다.</p>
+            </div>
+            <div class="code">
+                &lt;div th:if="${user.name == '홍길동'}"&gt;<br>
+                &nbsp;&nbsp;&lt;p&gt;관리자 권한이 있습니다.&lt;/p&gt;<br>
+                &lt;/div&gt;
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>5. 삼항 연산자</h2>
+            <p>상태: <span th:text="${user.name == '홍길동'} ? '활성' : '비활성'" class="highlight">활성</span></p>
+            <div class="code">
+                &lt;span th:text="${user.name == '홍길동'} ? '활성' : '비활성'"&gt;활성&lt;/span&gt;
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>6. URL 생성</h2>
+            <a th:href="@{/mvc/posts}" class="btn">포스트 목록으로</a>
+            <div class="code">
+                &lt;a th:href="@{/mvc/posts}" class="btn"&gt;포스트 목록으로&lt;/a&gt;
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

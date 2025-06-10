@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>포스트 상세</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        .post-detail {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+        .post-title {
+            font-size: 24px;
+            margin: 0 0 15px 0;
+        }
+        .post-body {
+            color: #333;
+            margin: 0 0 20px 0;
+            line-height: 1.5;
+            font-size: 16px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .actions {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>포스트 상세</h1>
+        
+        <div class="post-detail">
+            <h2 class="post-title" th:text="${post.title}">포스트 제목</h2>
+            <div class="post-body" th:text="${post.body}">포스트 내용</div>
+        </div>
+        
+        <div class="actions">
+            <a th:href="@{/mvc/posts}" class="btn">목록으로</a>
+            <a th:href="@{/mvc/posts/{id}/edit(id=${post.id})}" class="btn">수정</a>
+            <form th:action="@{/mvc/posts/{id}/delete(id=${post.id})}" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html> 

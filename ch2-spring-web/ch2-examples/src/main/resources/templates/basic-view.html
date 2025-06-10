@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>기본 뷰</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .links {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Spring MVC 기본 뷰</h1>
+        
+        <p>이 페이지는 Spring MVC 컨트롤러에서 뷰 이름을 반환하여 렌더링된 기본 Thymeleaf 뷰입니다.</p>
+        
+        <div class="links">
+            <h2>다른 예제 링크</h2>
+            <a th:href="@{/mvc/model-example}" class="btn">모델 예제</a>
+            <a th:href="@{/mvc/posts}" class="btn">포스트 목록</a>
+            <a th:href="@{/rest/posts}" class="btn">REST API 포스트 목록 (JSON)</a>
+        </div>
+    </div>
+</body>
+</html>
