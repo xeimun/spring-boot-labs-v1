@@ -1,5 +1,6 @@
 rootProject.name = 'spring-boot-labs-v1'
 
+include 'ch1-spring-boot-basic:code-yourself:my-first-springboot-app'
 include 'ch1-spring-boot-basic:examples:01-what-is-spring-boot'
 include 'ch1-spring-boot-basic:examples:02-beans-and-di'
 include 'ch1-spring-boot-basic:examples:03-profiles-and-env'

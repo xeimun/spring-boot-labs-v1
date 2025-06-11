@@ -1,4 +1,4 @@
-package com.captainyun7.ch2examples._03_mvc;
+package com.captainyun7.ch2examples._01_mvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
