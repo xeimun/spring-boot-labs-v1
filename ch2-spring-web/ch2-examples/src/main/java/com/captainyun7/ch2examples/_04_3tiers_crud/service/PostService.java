@@ -4,6 +4,7 @@ import com.captainyun7.ch2examples._04_3tiers_crud.domain.Post;
 import com.captainyun7.ch2examples._04_3tiers_crud.dto.PostCreateRequest;
 import com.captainyun7.ch2examples._04_3tiers_crud.dto.PostResponse;
 import com.captainyun7.ch2examples._04_3tiers_crud.dto.PostUpdateRequest;
+import com.captainyun7.ch2examples._04_3tiers_crud.exception.PostNotFoundException;
 import com.captainyun7.ch2examples._04_3tiers_crud.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,7 @@ public class PostService {
 
     public PostResponse getPost(Long id) {
         Post post = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Post not found"));
+                .orElseThrow(() -> new PostNotFoundException(id));
         return toResponse(post);
     }
 
