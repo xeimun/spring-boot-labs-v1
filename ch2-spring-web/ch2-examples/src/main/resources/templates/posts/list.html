@@ -3,77 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>포스트 목록</title>
-    <style>
-        body {
-            font-family: 'Malgun Gothic', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-            margin-top: 0;
-        }
-        .post-list {
-            list-style: none;
-            padding: 0;
-        }
-        .post-item {
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 4px;
-            background-color: #fff;
-        }
-        .post-title {
-            font-size: 18px;
-            margin: 0 0 10px 0;
-        }
-        .post-body {
-            color: #666;
-            margin: 0;
-        }
-        .btn {
-            display: inline-block;
-            padding: 8px 12px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            margin-right: 5px;
-        }
-        .btn-danger {
-            background-color: #dc3545;
-        }
-        .alert {
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .actions {
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
         <h1>포스트 목록</h1>
-        
-        <!-- 성공 메시지 표시 -->
-        <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
         
         <!-- 포스트 목록 -->
         <div th:if="${not #lists.isEmpty(posts)}">
@@ -83,24 +16,11 @@
                     <p class="post-body" th:text="${post.body}">포스트 내용</p>
                     <div>
                         <a th:href="@{/mvc/posts/{id}(id=${post.id})}" class="btn">상세보기</a>
-                        <a th:href="@{/mvc/posts/{id}/edit(id=${post.id})}" class="btn">수정</a>
-                        <form th:action="@{/mvc/posts/{id}/delete(id=${post.id})}" method="post" style="display:inline;">
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
-                        </form>
                     </div>
                 </li>
             </ul>
         </div>
-        
-        <!-- 포스트가 없는 경우 -->
-        <div th:if="${#lists.isEmpty(posts)}">
-            <p>등록된 포스트가 없습니다.</p>
-        </div>
-        
-        <!-- 작성 버튼 -->
-        <div class="actions">
-            <a th:href="@{/mvc/posts/new}" class="btn">새 포스트 작성</a>
-        </div>
+
     </div>
 </body>
 </html> 

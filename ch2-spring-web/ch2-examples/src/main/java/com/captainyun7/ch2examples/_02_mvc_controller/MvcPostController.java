@@ -11,12 +11,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/mvc")
-public class PostController {
+public class MvcPostController {
 
     private final List<Post> posts = new ArrayList<>();
 
     // 생성자에서 초기 데이터 추가
-    public PostController() {
+    public MvcPostController() {
         posts.add(new Post(1L, "환영합니다", "Thymeleaf 예제입니다."));
         posts.add(new Post(2L, "Spring MVC", "스프링 MVC 컨트롤러 예제입니다."));
     }
