@@ -71,7 +71,7 @@
 
 ### 예외 처리
 
-* title 누르기 및 completed 누락 시: `400 Bad Request`
+* title 및 completed 누락 시: `400 Bad Request`
 * 없는 ID에 대한 조회/수정/삭제 시: `404 Not Found`
 
 ---
