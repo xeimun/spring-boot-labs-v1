@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SignupRequest {
+public class StrongSignupRequest {
 
     @NotBlank(message = "아이디는 필수입니다.")
     @Size(min = 5, max = 10, message = "5~10 자리 아이디를 입력하세요")
@@ -14,7 +14,7 @@ public class SignupRequest {
     private String username;
 
     @NotBlank(message = "비밀번호는 필수입니다.")
-    @Size(min = 8, message = "비밀번호는 최소 8자 이상이어야 합니다.")
+    @ValidPassword
     private String password;
 
     @NotBlank(message = "이메일은 필수입니다.")
