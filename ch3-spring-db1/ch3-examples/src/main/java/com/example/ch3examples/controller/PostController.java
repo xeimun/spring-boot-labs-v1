@@ -2,6 +2,7 @@ package com.example.ch3examples.controller;
 
 import com.example.ch3examples.dto.PostCreateRequest;
 import com.example.ch3examples.dto.PostResponse;
+import com.example.ch3examples.dto.PostSearch;
 import com.example.ch3examples.dto.PostUpdateRequest;
 import com.example.ch3examples.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,10 +24,10 @@ public class PostController {
         return ResponseEntity.ok(service.createPost(request));
     }
 
-    @GetMapping
-    public ResponseEntity<List<PostResponse>> getAll() {
-        return ResponseEntity.ok(service.getAllPosts());
-    }
+//    @GetMapping
+//    public ResponseEntity<List<PostResponse>> getAll() {
+//        return ResponseEntity.ok(service.getAllPosts());
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<PostResponse> getById(@PathVariable Long id) {
@@ -42,4 +44,19 @@ public class PostController {
         service.deletePost(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping
+    public ResponseEntity<Map<String, Object>> list(@ModelAttribute PostSearch search) {
+        List<PostResponse> posts = service.getPosts(search);
+        int total = service.getTotalCount(search);
+
+        return ResponseEntity.ok(Map.of(
+                "items", posts,
+                "total", total,
+                "page", search.getPage(),
+                "size", search.getSize()
+        ));
+    }
+
+
 }

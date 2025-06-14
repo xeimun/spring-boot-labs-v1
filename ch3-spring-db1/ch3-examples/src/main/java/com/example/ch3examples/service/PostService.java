@@ -3,6 +3,7 @@ package com.example.ch3examples.service;
 import com.example.ch3examples.domain.Post;
 import com.example.ch3examples.dto.PostCreateRequest;
 import com.example.ch3examples.dto.PostResponse;
+import com.example.ch3examples.dto.PostSearch;
 import com.example.ch3examples.dto.PostUpdateRequest;
 import com.example.ch3examples.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
@@ -24,11 +25,11 @@ public class PostService {
         return PostResponse.from(post);
     }
 
-    public List<PostResponse> getAllPosts() {
-        return postMapper.findAll().stream()
-                .map(post -> PostResponse.from(post))
-                .toList();
-    }
+//    public List<PostResponse> getAllPosts() {
+//        return postMapper.findAll().stream()
+//                .map(post -> PostResponse.from(post))
+//                .toList();
+//    }
 
     public PostResponse getPostById(Long id) {
         return Optional.ofNullable(postMapper.findById(id))
@@ -54,5 +55,15 @@ public class PostService {
         if (deleted == 0) {
             throw new NoSuchElementException("게시글이 존재하지 않습니다.");
         }
+    }
+
+    public List<PostResponse> getPosts(PostSearch search) {
+        return postMapper.findAll(search).stream()
+                .map(PostResponse::from)
+                .toList();
+    }
+
+    public int getTotalCount(PostSearch search) {
+        return postMapper.count(search);
     }
 }
