@@ -1,10 +1,7 @@
 package com.example.ch3examples.service;
 
 import com.example.ch3examples.domain.Post;
-import com.example.ch3examples.dto.PostCreateRequest;
-import com.example.ch3examples.dto.PostResponse;
-import com.example.ch3examples.dto.PostSearch;
-import com.example.ch3examples.dto.PostUpdateRequest;
+import com.example.ch3examples.dto.*;
 import com.example.ch3examples.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -57,13 +54,13 @@ public class PostService {
         }
     }
 
-    public List<PostResponse> getPosts(PostSearch search) {
-        return postMapper.findAll(search).stream()
+    public PostPageResponse getPosts(PostSearch search) {
+
+        List<PostResponse> posts = postMapper.findAll(search).stream()
                 .map(PostResponse::from)
                 .toList();
-    }
+        int count = postMapper.count(search);
 
-    public int getTotalCount(PostSearch search) {
-        return postMapper.count(search);
+        return PostPageResponse.from(posts, search, count);
     }
 }

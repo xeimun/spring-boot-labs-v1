@@ -1,9 +1,6 @@
 package com.example.ch3examples.controller;
 
-import com.example.ch3examples.dto.PostCreateRequest;
-import com.example.ch3examples.dto.PostResponse;
-import com.example.ch3examples.dto.PostSearch;
-import com.example.ch3examples.dto.PostUpdateRequest;
+import com.example.ch3examples.dto.*;
 import com.example.ch3examples.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -46,16 +43,8 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<Map<String, Object>> list(@ModelAttribute PostSearch search) {
-        List<PostResponse> posts = service.getPosts(search);
-        int total = service.getTotalCount(search);
-
-        return ResponseEntity.ok(Map.of(
-                "items", posts,
-                "total", total,
-                "page", search.getPage(),
-                "size", search.getSize()
-        ));
+    public ResponseEntity<PostPageResponse> list(PostSearch search) {
+        return ResponseEntity.ok(service.getPosts(search));
     }
 
 
