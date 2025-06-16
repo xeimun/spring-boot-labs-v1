@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,15 +20,15 @@ public class PostService {
 
     public PostResponse createPost(PostCreateRequest request) {
         Post post = request.toDomain();
-        repository.save(post);
-        return PostResponse.from(post);
+        Post saved = repository.save(post);
+        return PostResponse.from(saved);
     }
 
-//    public List<PostResponse> getAllPosts() {
-//        return repository.findAll().stream()
-//                .map(post -> PostResponse.from(post))
-//                .toList();
-//    }
+    public List<PostResponse> getAllPosts() {
+        return repository.findAll().stream()
+                .map(PostResponse::from)
+                .toList();
+    }
 
     public PostResponse getPostById(Long id) {
         return repository.findById(id)
@@ -38,9 +37,8 @@ public class PostService {
     }
 
     public PostResponse updatePost(Long id, PostUpdateRequest request) {
-        Post post = Optional.of(repository.findById(id))
-                .orElseThrow(() -> new NoSuchElementException("게시글이 존재하지 않습니다."))
-                .get();
+        Post post = repository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("게시글이 존재하지 않습니다."));
         post.setTitle(request.getTitle());
         post.setBody(request.getBody());
 

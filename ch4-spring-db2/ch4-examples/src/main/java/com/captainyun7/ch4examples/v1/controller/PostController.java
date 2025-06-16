@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/posts")
@@ -19,10 +21,10 @@ public class PostController {
         return ResponseEntity.ok(service.createPost(request));
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<PostResponse>> getAll() {
-//        return ResponseEntity.ok(service.getAllPosts());
-//    }
+    @GetMapping
+    public ResponseEntity<List<PostResponse>> getAll() {
+        return ResponseEntity.ok(service.getAllPosts());
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<PostResponse> getById(@PathVariable Long id) {
@@ -40,9 +42,9 @@ public class PostController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
-    public ResponseEntity<PostPageResponse> searchPosts(PostSearchRequest search) {
-        return ResponseEntity.ok(service.search(search));
-    }
+//    @GetMapping
+//    public ResponseEntity<PostPageResponse> searchPosts(PostSearchRequest search) {
+//        return ResponseEntity.ok(service.search(search));
+//    }
 
 }
