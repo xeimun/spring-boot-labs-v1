@@ -28,12 +28,12 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="delete" parameterType="long">
+    <delete id="deleteById" parameterType="long">
         DELETE FROM posts
         WHERE id = #{id}
     </delete>
 
-    <select id="findAll" parameterType="com.example.ch3examples.dto.PostSearch" resultType="com.example.ch3examples.domain.Post">
+    <select id="findAll" parameterType="com.example.ch3examples.dto.PostSearchRequest" resultType="com.example.ch3examples.domain.Post">
         SELECT *
         FROM posts
         <where>
@@ -45,7 +45,7 @@
         LIMIT #{size} OFFSET #{offset}
     </select>
 
-    <select id="count" parameterType="com.example.ch3examples.dto.PostSearch" resultType="int">
+    <select id="count" parameterType="com.example.ch3examples.dto.PostSearchRequest" resultType="int">
         SELECT COUNT(*)
         FROM posts
         <where>

@@ -6,9 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/posts")
@@ -43,7 +40,7 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<PostPageResponse> list(PostSearch search) {
+    public ResponseEntity<PostPageResponse> list(PostSearchRequest search) {
         return ResponseEntity.ok(service.getPosts(search));
     }
 

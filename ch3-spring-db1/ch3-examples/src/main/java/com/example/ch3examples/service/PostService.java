@@ -48,13 +48,13 @@ public class PostService {
     }
 
     public void deletePost(Long id) {
-        int deleted = postMapper.delete(id);
+        int deleted = postMapper.deleteById(id);
         if (deleted == 0) {
             throw new NoSuchElementException("게시글이 존재하지 않습니다.");
         }
     }
 
-    public PostPageResponse getPosts(PostSearch search) {
+    public PostPageResponse getPosts(PostSearchRequest search) {
 
         List<PostResponse> posts = postMapper.findAll(search).stream()
                 .map(PostResponse::from)
