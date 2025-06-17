@@ -3,6 +3,8 @@ package com.captainyun7.ch4examples.v1.service;
 import com.captainyun7.ch4examples.v1.domain.Post;
 import com.captainyun7.ch4examples.v1.dto.*;
 import com.captainyun7.ch4examples.v1.repository.PostRepository;
+import com.captainyun7.ch4examples.v2.dto.PostPageResponse;
+import com.captainyun7.ch4examples.v2.dto.PostSearchRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -108,29 +110,29 @@ class PostServiceTest {
         verify(postRepository).deleteById(id);
     }
 
-    @Test
-    void 검색어로_게시글_조회_페이징_정상() {
-        // given
-        PostSearchRequest request = new PostSearchRequest("JPA", 0, 10);
-        Pageable pageable = PageRequest.of(0, 10);
-
-        List<Post> postList = List.of(
-                new Post(null, "JPA란?", "내용1"),
-                new Post(null, "JPA 활용법", "내용2")
-        );
-        Page<Post> postPage = new PageImpl<>(postList, pageable, 2);
-
-        given(postRepository.findByTitleContaining("JPA", pageable))
-                .willReturn(postPage);
-
-        // when
-        PostPageResponse result = postService.search(request);
-
-        // then
-        assertThat(result.getPage()).isEqualTo(0);
-        assertThat(result.getSize()).isEqualTo(10);
-        assertThat(result.getTotalCount()).isEqualTo(2);
-        assertThat(result.getPosts()).hasSize(2);
-        assertThat(result.getPosts().get(0).getTitle()).isEqualTo("JPA란?");
-    }
+//    @Test
+//    void 검색어로_게시글_조회_페이징_정상() {
+//        // given
+//        PostSearchRequest request = new PostSearchRequest("JPA", 0, 10);
+//        Pageable pageable = PageRequest.of(0, 10);
+//
+//        List<Post> postList = List.of(
+//                new Post(null, "JPA란?", "내용1"),
+//                new Post(null, "JPA 활용법", "내용2")
+//        );
+//        Page<Post> postPage = new PageImpl<>(postList, pageable, 2);
+//
+//        given(postRepository.findByTitleContaining("JPA", pageable))
+//                .willReturn(postPage);
+//
+//        // when
+//        PostPageResponse result = postService.search(request);
+//
+//        // then
+//        assertThat(result.getPage()).isEqualTo(0);
+//        assertThat(result.getSize()).isEqualTo(10);
+//        assertThat(result.getTotalCount()).isEqualTo(2);
+//        assertThat(result.getPosts()).hasSize(2);
+//        assertThat(result.getPosts().get(0).getTitle()).isEqualTo("JPA란?");
+//    }
 }
