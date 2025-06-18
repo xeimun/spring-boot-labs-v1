@@ -49,7 +49,8 @@ public class PostService {
         } else if (request.getAuthor() != null) {
             posts = repository.findByAuthor(request.getAuthor(), pageable);
         } else if (request.getCreatedAt() != null) {
-            posts = repository.findByCreatedAtAfter(request.getCreatedAt(), pageable);
+            // posts = repository.findByCreatedAtAfter(request.getCreatedAt(), pageable);
+            posts = repository.searchByCreatedAtWithQueryDSL(request.getCreatedAt(), pageable);
             // posts = repository.searchByCreatedAfter(request.getCreatedAt(), pageable);
         } else {
             posts = repository.findAll(pageable); // 조건 없으면 전체 조회
