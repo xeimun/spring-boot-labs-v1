@@ -6,7 +6,7 @@
 
 * **GET** `/reviews`
 * **Query Parameters**:
-
+=
     * `bookTitle`: 도서 제목 키워드
     * `author`: 리뷰 작성자
     * `rating`: 정확한 평점
