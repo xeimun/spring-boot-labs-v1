@@ -1,4 +1,4 @@
-package com.captainyun7.ch4examples.v4.dto;
+package com.captainyun7.ch4examples.v3.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

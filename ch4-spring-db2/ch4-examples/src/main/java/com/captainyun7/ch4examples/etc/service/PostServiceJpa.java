@@ -1,7 +1,7 @@
-package com.captainyun7.ch4examples.v3.service;
+package com.captainyun7.ch4examples.etc.service;
 
 
-import com.captainyun7.ch4examples.v3.domain.Post;
+import com.captainyun7.ch4examples.etc.domain.Post;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;

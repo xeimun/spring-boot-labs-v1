@@ -1,6 +1,6 @@
-package com.captainyun7.ch4examples.v4.dto;
+package com.captainyun7.ch4examples.v3.dto;
 
-import com.captainyun7.ch4examples.v4.domain.Post;
+import com.captainyun7.ch4examples.v1.domain.Post;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostCreateRequest {
+public class PostUpdateRequest {
     private String title;
     private String body;
 

@@ -1,8 +1,8 @@
-package com.captainyun7.ch4examples.v4.service;
+package com.captainyun7.ch4examples.v3.service;
 
-import com.captainyun7.ch4examples.v4.domain.Post;
-import com.captainyun7.ch4examples.v4.dto.*;
-import com.captainyun7.ch4examples.v4.repository.PostRepository;
+import com.captainyun7.ch4examples.v3.domain.Post;
+import com.captainyun7.ch4examples.v3.dto.*;
+import com.captainyun7.ch4examples.v3.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,12 +43,14 @@ public class PostService {
         // 조건 조합 분기
         if (request.getKeyword() != null && request.getAuthor() != null) {
             posts = repository.findByAuthorAndTitleContaining(request.getAuthor(), request.getKeyword(), pageable);
+            // posts = repository.searchByAuthorAndTitle(request.getAuthor(), request.getKeyword(), pageable);
         } else if (request.getKeyword() != null) {
             posts = repository.findByTitleContaining(request.getKeyword(), pageable);
         } else if (request.getAuthor() != null) {
             posts = repository.findByAuthor(request.getAuthor(), pageable);
         } else if (request.getCreatedAt() != null) {
             posts = repository.findByCreatedAtAfter(request.getCreatedAt(), pageable);
+            // posts = repository.searchByCreatedAfter(request.getCreatedAt(), pageable);
         } else {
             posts = repository.findAll(pageable); // 조건 없으면 전체 조회
         }

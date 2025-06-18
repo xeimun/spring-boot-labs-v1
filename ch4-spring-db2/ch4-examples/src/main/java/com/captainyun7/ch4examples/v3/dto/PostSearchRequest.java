@@ -1,12 +1,10 @@
-package com.captainyun7.ch4examples.v4.dto;
+package com.captainyun7.ch4examples.v3.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @AllArgsConstructor

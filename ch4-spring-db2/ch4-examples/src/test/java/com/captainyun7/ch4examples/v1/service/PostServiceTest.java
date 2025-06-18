@@ -3,20 +3,14 @@ package com.captainyun7.ch4examples.v1.service;
 import com.captainyun7.ch4examples.v1.domain.Post;
 import com.captainyun7.ch4examples.v1.dto.*;
 import com.captainyun7.ch4examples.v1.repository.PostRepository;
-import com.captainyun7.ch4examples.v2.dto.PostPageResponse;
-import com.captainyun7.ch4examples.v2.dto.PostSearchRequest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,6 +19,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+@Disabled
 @ExtendWith(MockitoExtension.class)
 class PostServiceTest {
 

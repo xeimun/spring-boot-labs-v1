@@ -1,7 +1,7 @@
-package com.captainyun7.ch4examples.v4.controller;
+package com.captainyun7.ch4examples.v3.controller;
 
-import com.captainyun7.ch4examples.v4.dto.*;
-import com.captainyun7.ch4examples.v4.service.PostService;
+import com.captainyun7.ch4examples.v3.dto.*;
+import com.captainyun7.ch4examples.v3.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
