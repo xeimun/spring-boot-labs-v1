@@ -1,14 +1,8 @@
 package com.captainyun7.ch4examples.v5.controller;
 
-import com.captainyun7.ch4examples.v5.dto.comment.CommentCreateRequest;
-import com.captainyun7.ch4examples.v5.dto.comment.CommentPageResponse;
-import com.captainyun7.ch4examples.v5.dto.comment.CommentResponse;
-import com.captainyun7.ch4examples.v5.dto.comment.CommentUpdateRequest;
+import com.captainyun7.ch4examples.v5.dto.comment.*;
 import com.captainyun7.ch4examples.v5.service.CommentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,18 +30,15 @@ public class CommentController {
     }
 
     /**
-     * 댓글 조회
-     * POST /api/v1/posts/{postId}/comments
+     * 댓글 조회 (계층형/평면형 선택 가능)
+     * GET /api/v1/posts/{postId}/comments
      */
     @GetMapping("/posts/{postId}/comments")
     public ResponseEntity<CommentPageResponse> getComments(
             @PathVariable Long postId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @ModelAttribute CommentSearchRequest request) {
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").ascending());
-
-        CommentPageResponse response = commentService.getCommentsByPost(postId, pageable);
+        CommentPageResponse response = commentService.getCommentsByPost(postId, request);
         return ResponseEntity.ok(response);
     }
 
@@ -73,5 +64,4 @@ public class CommentController {
         commentService.deleteComment(commentId);
         return ResponseEntity.noContent().build(); // 204 No Content
     }
-
 }

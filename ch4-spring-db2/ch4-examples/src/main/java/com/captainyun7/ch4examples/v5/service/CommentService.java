@@ -2,20 +2,22 @@ package com.captainyun7.ch4examples.v5.service;
 
 import com.captainyun7.ch4examples.v5.domain.Comment;
 import com.captainyun7.ch4examples.v5.domain.Post;
-import com.captainyun7.ch4examples.v5.dto.comment.CommentCreateRequest;
-import com.captainyun7.ch4examples.v5.dto.comment.CommentPageResponse;
-import com.captainyun7.ch4examples.v5.dto.comment.CommentResponse;
-import com.captainyun7.ch4examples.v5.dto.comment.CommentUpdateRequest;
+import com.captainyun7.ch4examples.v5.dto.comment.*;
 import com.captainyun7.ch4examples.v5.repository.comment.CommentRepository;
 import com.captainyun7.ch4examples.v5.repository.post.PostRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -48,28 +50,57 @@ public class CommentService {
         return CommentResponse.from(saved);
     }
 
-    public CommentResponse createComment2(Long postId, CommentCreateRequest request) {
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다. ID: " + postId));
-
-        Comment comment = Comment.builder()
-                .content(request.getContent())
-                .author(request.getAuthor())
-                .createdAt(LocalDateTime.now())
-                .post(post)
-                .build();
-
-        Comment savedComment = commentRepository.save(comment);
-        return CommentResponse.from(savedComment);
-    }
-
     @Transactional(readOnly = true)
-    public CommentPageResponse getCommentsByPost(Long postId, Pageable pageable) {
+    public CommentPageResponse getCommentsByPost(Long postId, CommentSearchRequest request) {
+        Pageable pageable = PageRequest.of(
+                request.getPage(),
+                request.getSize(),
+                Sort.by("createdAt").ascending()
+        );
+
+        if (request.isHierarchical()) {
+            return getHierarchicalCommentsByPost(postId, pageable);
+        } else {
+            return getFlatCommentsByPost(postId, pageable);
+        }
+    }
+    
+    private CommentPageResponse getFlatCommentsByPost(Long postId, Pageable pageable) {
         Page<CommentResponse> page = commentRepository
-                .findByPostIdOrderByCreatedAtAsc(postId, pageable)
+                .findByPostId(postId, pageable)
                 .map(CommentResponse::from);
 
         return CommentPageResponse.from(page);
+    }
+    
+    private CommentPageResponse getHierarchicalCommentsByPost(Long postId, Pageable pageable) {
+        // 1. 부모 댓글만 페이징 처리하여 가져옴
+        Page<Comment> parentCommentsPage = commentRepository.findParentCommentsByPostId(postId, pageable);
+        
+        List<CommentResponse> hierarchicalComments = new ArrayList<>();
+        
+        // 2. 각 부모 댓글에 대해 자식 댓글을 모두 조회하여 계층 구조로 변환
+        for (Comment parentComment : parentCommentsPage.getContent()) {
+            CommentResponse parentResponse = CommentResponse.from(parentComment);
+            
+            // 3. 자식 댓글 조회 및 설정
+            List<Comment> childComments = commentRepository.findByParentIdOrderByCreatedAtAsc(parentComment.getId());
+            List<CommentResponse> childResponses = childComments.stream()
+                    .map(CommentResponse::from)
+                    .collect(Collectors.toList());
+            
+            parentResponse.setReplies(childResponses);
+            hierarchicalComments.add(parentResponse);
+        }
+        
+        // 4. 페이징 정보와 함께 응답 생성
+        return CommentPageResponse.builder()
+                .page(parentCommentsPage.getNumber())
+                .size(parentCommentsPage.getSize())
+                .totalElements(parentCommentsPage.getTotalElements())
+                .totalPages(parentCommentsPage.getTotalPages())
+                .comments(hierarchicalComments)
+                .build();
     }
 
     public CommentResponse updateComment(Long commentId, CommentUpdateRequest request) {
