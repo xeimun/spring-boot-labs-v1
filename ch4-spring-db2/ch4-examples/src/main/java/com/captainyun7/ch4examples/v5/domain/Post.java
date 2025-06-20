@@ -32,6 +32,6 @@ public class Post {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<com.captainyun7.ch4examples.v5.domain.Comment> comments = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
 }
