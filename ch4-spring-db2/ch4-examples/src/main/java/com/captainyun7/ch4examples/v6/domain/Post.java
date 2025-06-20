@@ -1,10 +1,11 @@
-package com.captainyun7.ch4examples.v4.domain;
+package com.captainyun7.ch4examples.v6.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -31,11 +32,8 @@ public class Post {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @BatchSize(size = 100)
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    public void addComment(Comment comment) {
-        comments.add(comment);
-        comment.setPost(this); // 연관관계 주인도 설정해줘야 DB에 반영됨
-    }
 }
