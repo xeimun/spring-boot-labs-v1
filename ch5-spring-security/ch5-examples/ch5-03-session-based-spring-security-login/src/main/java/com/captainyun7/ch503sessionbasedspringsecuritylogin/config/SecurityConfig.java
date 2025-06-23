@@ -41,6 +41,9 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .maximumSessions(1)
                 .expiredUrl("/api/auth/login")
+            )
+            .securityContext(securityContext ->
+                    securityContext.requireExplicitSave(false) // 자동 저장 활성화
             );
         
         // H2 콘솔 사용을 위한 설정

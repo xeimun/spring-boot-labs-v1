@@ -36,13 +36,10 @@ public class AuthController {
         UserResponse userResponse = authService.login(loginRequest);
         return ResponseEntity.ok(userResponse);
     }
-    
+
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
+        authService.logout(request, response);
         return ResponseEntity.ok().build();
     }
 } 
